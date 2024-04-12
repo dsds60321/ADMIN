@@ -1,5 +1,26 @@
 import styled from '@emotion/styled';
 
+export const NavWrap = styled.div`
+  height: 100vh;
+  width: 219px;
+  border-right: 1px solid #e4e9ec;
+  transition: width 0.2s;
+  overflow-y: auto;
+`;
+
+export const NavInnerWrap = styled.div`
+  height: calc(100% - 110px);
+  overflow-y: auto;
+`;
+
+export const Logo = styled.div`
+  width: 84px;
+  margin-left: 20px;
+  margin-top: 20px;
+  & img {
+    width: 84px;
+  }
+`;
 export const MenuContents = styled.div`
   margin: 20px;
   ul {
@@ -23,23 +44,23 @@ export const MenuContents = styled.div`
       font-size: 13px;
     }
   }
-  & ul > li:nth-of-type(2) {
+  & ul > li:nth-of-type(n + 2) {
     display: none;
     height: auto;
     opacity: 1;
   }
-  & ul > li:nth-of-type(2) > ul {
+  & ul > li:nth-of-type(n + 2) > ul {
     padding-top: 5px;
     padding-bottom: 8px;
   }
-  & ul > li:nth-of-type(2) > ul > li {
-    height: 30px;
+  & ul > li:nth-of-type(n + 2) > ul > li {
+    height: 20px;
   }
-  & ul > li:nth-of-type(2) > ul > li p {
+  & ul > li > ul > li p {
     position: relative;
     color: #70767e;
   }
-  & ul > li:nth-of-type(2) > ul > li a {
+  & ul > li > ul > li a {
     text-decoration: none;
     font-size: 13px;
     color: #70767e;

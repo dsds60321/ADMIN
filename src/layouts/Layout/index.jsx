@@ -1,42 +1,14 @@
 import { Outlet } from 'react-router-dom';
-import {
-  Contents,
-  ContentsWrap,
-  Header,
-  HeaderDetailWrap,
-  HeaderRight,
-  Logo,
-  NavInnerWrap,
-  NavWrap,
-  UserIcon,
-} from '@layouts/Layout/styles.jsx';
-import Navigation from '@layouts/Navigation/index.jsx';
-import { navigation } from '../../../data/navigation.js';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Contents, ContentsWrap } from '@layouts/Layout/styles.jsx';
+import Sidebar from '@layouts/Sidebar/index.jsx';
+import { navigation } from '../../data/navigation.js';
+import Header from '@layouts/Header/index.jsx';
 const Layout = () => {
   return (
     <>
-      <NavWrap>
-        <Logo>
-          <img src="src/assets/images/logo.png" alt="" />
-        </Logo>
-        <NavInnerWrap>
-          <Navigation data={navigation} />
-        </NavInnerWrap>
-      </NavWrap>
+      <Sidebar data={navigation} />
       <ContentsWrap>
-        <Header>
-          <HeaderRight>
-            <HeaderDetailWrap>
-              <UserIcon />
-              <p>아이디</p>
-              <FontAwesomeIcon style={{ marginLeft: '10px', color: '#b8c0ca' }} icon={'fas fa-caret-down'} />
-            </HeaderDetailWrap>
-            <HeaderDetailWrap>
-              <FontAwesomeIcon style={{ color: '#b8c0ca' }} icon={'fas fa-sign-out-alt'} />
-            </HeaderDetailWrap>
-          </HeaderRight>
-        </Header>
+        <Header />
         <Contents>
           <Outlet />
         </Contents>
