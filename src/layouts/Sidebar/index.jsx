@@ -1,20 +1,55 @@
-import { Logo, MenuContents, NavInnerWrap, NavWrap } from '@layouts/Sidebar/styles.jsx';
+import { Logo, MenuContents, NavInnerWrap, NavWrap, ThreeDepth } from '@layouts/Sidebar/styles.jsx';
 import { useCallback, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 
 const NaviItem = ({ item, isSelected }) => {
-  return (
-    <li style={isSelected ? { display: 'block' } : undefined}>
-      <ul>
-        <li>
-          <p>
-            <Link to={item.url}>{item.title}</Link>
-          </p>
+  const [selectItem, setSelectItem] = useState({});
+
+  const onSelectItem = useCallback((path) => {
+    setSelectItem((prevState) => ({
+      ...prevState,
+      [path]: !prevState[path],
+    }));
+  }, []);
+
+  console.log(selectItem);
+
+  const isThreeDepth = item.list?.length > 0;
+
+  if (isThreeDepth) {
+    return (
+      <>
+        <li onClick={() => onSelectItem(item.title)} style={isSelected ? { display: 'flex' } : undefined}>
+          <i>
+            <FontAwesomeIcon icon={item.icon} />
+          </i>
+          <p>{item.title}</p>
         </li>
-      </ul>
-    </li>
-  );
+        <ThreeDepth style={selectItem[item.title] ? { display: 'block' } : undefined}>
+          {item.list.map((innerItem, index) => (
+            <li key={`${innerItem.title} ${index}`} style={selectItem[item.title] ? { display: 'block' } : undefined}>
+              <p>
+                <Link to={innerItem.url}>{innerItem.title}</Link>
+              </p>
+            </li>
+          ))}
+        </ThreeDepth>
+      </>
+    );
+  } else {
+    return (
+      <li style={isSelected ? { display: 'block' } : undefined}>
+        <ul>
+          <li>
+            <p>
+              <Link to={item.url}>{item.title}</Link>
+            </p>
+          </li>
+        </ul>
+      </li>
+    );
+  }
 };
 
 const Sidebar = ({ data }) => {
@@ -26,15 +61,6 @@ const Sidebar = ({ data }) => {
       [path]: !prevState[path],
     }));
   }, []);
-
-  const isSelected = useCallback(
-    (path) => {
-      return !!selectItem[path];
-    },
-    [selectItem],
-  );
-
-  console.log(selectItem);
 
   return (
     <NavWrap>
@@ -53,11 +79,14 @@ const Sidebar = ({ data }) => {
               </li>
               {navItem.item &&
                 navItem.item.map((innerItem) => {
-                  if (true) {
-                    return <NaviItem key={innerItem.title} item={innerItem} isSelected={!!selectItem[navItem.title]} />;
-                  } else {
-                    return <div>h2</div>;
-                  }
+                  return (
+                    <NaviItem
+                      key={innerItem.title}
+                      item={innerItem}
+                      selectItem={selectItem}
+                      isSelected={!!selectItem[navItem.title]}
+                    />
+                  );
                 })}
             </ul>
           ))}

@@ -2,12 +2,12 @@ const navigation = [
   {
     title: '폼',
     icon: 'file-invoice',
-    item: [{ title: '샘플', url: '/form' }],
+    item: [{ title: '폼_샘플', url: '/form' }],
   },
   {
     title: '리스트',
     icon: 'file-invoice',
-    item: [{ title: '샘플', url: '/list' }],
+    item: [{ title: '리스트_샘플', url: '/list' }],
   },
   {
     title: '3-depth',
@@ -19,8 +19,8 @@ const navigation = [
         icon: 'file-invoice',
         list: [
           { title: 'depth3', url: '/dept3', icon: '' },
-          { title: 'depth3', url: '/dept4', icon: '' },
-          { title: 'depth3', url: '/dept5', icon: '' },
+          { title: 'depth4', url: '/dept4', icon: '' },
+          { title: 'depth5', url: '/dept5', icon: '' },
         ],
       },
     ],

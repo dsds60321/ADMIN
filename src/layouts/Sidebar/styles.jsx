@@ -53,6 +53,7 @@ export const MenuContents = styled.div`
     //}
   }
   & ul > li:nth-of-type(n + 2) {
+    margin-left: 10px;
     display: none;
     height: auto;
     opacity: 1;
@@ -81,5 +82,20 @@ export const MenuContents = styled.div`
       bottom: -5px;
       background-color: #eff3f6;
     }
+  }
+`;
+
+export const ThreeDepth = styled.li`
+  margin-left: 20px !important;
+  height: auto !important;
+  opacity: 1 !important;
+  > li a {
+    text-decoration: none !important;
+    font-size: 13px !important;
+    color: #70767e !important;
+  }
+  & p {
+    position: relative;
+    color: #70767e;
   }
 `;
