@@ -1,8 +1,41 @@
 import { Logo, MenuContents, NavInnerWrap, NavWrap } from '@layouts/Sidebar/styles.jsx';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
+
+const NaviItem = ({ item, isSelected }) => {
+  return (
+    <li style={isSelected ? { display: 'block' } : undefined}>
+      <ul>
+        <li>
+          <p>
+            <Link to={item.url}>{item.title}</Link>
+          </p>
+        </li>
+      </ul>
+    </li>
+  );
+};
 
 const Sidebar = ({ data }) => {
-  const [selectedIndices, setSelectedIndices] = useState({});
+  const [selectItem, setSelectItem] = useState({});
+
+  const onSelectItem = useCallback((path) => {
+    setSelectItem((prevState) => ({
+      ...prevState,
+      [path]: !prevState[path],
+    }));
+  }, []);
+
+  const isSelected = useCallback(
+    (path) => {
+      return !!selectItem[path];
+    },
+    [selectItem],
+  );
+
+  console.log(selectItem);
+
   return (
     <NavWrap>
       <Logo>
@@ -10,35 +43,24 @@ const Sidebar = ({ data }) => {
       </Logo>
       <NavInnerWrap>
         <MenuContents>
-          <ul className="menu-item group" data-navtitle="contract">
-            <li className="item">
-              <i className="fas fa-user"></i>
-              <p data-i18n="nav.info.mcht">가맹점 정보</p>
-            </li>
-            <li className="sub-item">
-              <ul className="menu-item">
-                <li className="item" data-navsubtitle="view">
-                  <p>
-                    <a href="/mcht/view" data-i18n="nav.info.basic">
-                      기본 정보
-                    </a>
-                  </p>
-                </li>
-                <li className="item" data-navsubtitle="app">
-                  <p>
-                    <a href="/mcht/app" data-i18n="nav.info.app">
-                      앱 정보
-                    </a>
-                  </p>
-                </li>
-                <li className="item" data-navsubtitle="sub">
-                  <p>
-                    <a href="/mcht/sub">하위 사업자 조회</a>
-                  </p>
-                </li>
-              </ul>
-            </li>
-          </ul>
+          {data.map((navItem, index) => (
+            <ul key={`${navItem.title} ${index}`}>
+              <li onClick={() => onSelectItem(navItem.title)}>
+                <i>
+                  <FontAwesomeIcon icon={navItem.icon} />
+                </i>
+                <p>{navItem.title}</p>
+              </li>
+              {navItem.item &&
+                navItem.item.map((innerItem) => {
+                  if (true) {
+                    return <NaviItem key={innerItem.title} item={innerItem} isSelected={!!selectItem[navItem.title]} />;
+                  } else {
+                    return <div>h2</div>;
+                  }
+                })}
+            </ul>
+          ))}
         </MenuContents>
       </NavInnerWrap>
     </NavWrap>

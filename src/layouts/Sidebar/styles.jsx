@@ -43,6 +43,14 @@ export const MenuContents = styled.div`
       text-decoration: none;
       font-size: 13px;
     }
+    //& p:after {
+    //  content: '\\f00c';
+    //  font-size: 15px;
+    //  font-family: 'Font Awesome 5 Free';
+    //  font-weight: 900;
+    //  color: #000;
+    //  margin-left: auto;
+    //}
   }
   & ul > li:nth-of-type(n + 2) {
     display: none;

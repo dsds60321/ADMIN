@@ -13,16 +13,14 @@ const navigation = [
     title: '3-depth',
     icon: 'file-invoice',
     item: [
-      { title: 'depth-test', url: '/' },
-      { title: 'depth-test2', url: '/' },
+      { title: 'depth-test', url: '/depth' },
       {
         title: '샘플',
         icon: 'file-invoice',
         list: [
-          { title: 'depth3', url: '/', icon: '' },
-          { title: 'depth3', url: '/', icon: '' },
-          { title: 'depth3', url: '/', icon: '' },
-          { title: 'depth4', url: '/', icon: '' },
+          { title: 'depth3', url: '/dept3', icon: '' },
+          { title: 'depth3', url: '/dept4', icon: '' },
+          { title: 'depth3', url: '/dept5', icon: '' },
         ],
       },
     ],
