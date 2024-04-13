@@ -1,11 +1,11 @@
 import { Navigate } from 'react-router-dom';
 import loadable from '@loadable/component';
-import Dashboard from '@pages/Dashboard/index.jsx';
-import Layout from '@layouts/Layout/index.jsx';
 
 const isAuthenticated = true;
 
+const Layout = loadable(() => import('@layouts/Layout'));
 const Login = loadable(() => import('@pages/Login'));
+const Card = loadable(() => import('@pages/Trx/Card'));
 const routers = [
   {
     path: '/',
@@ -18,7 +18,10 @@ const routers = [
   {
     path: '/',
     element: <Layout />,
-    children: [{ index: true, element: <h1>Dashboard</h1> }],
+    children: [
+      { index: true, element: <h1>Dashboard</h1> },
+      { path: 'trx/card', element: <Card /> },
+    ],
   },
 ];
 

@@ -13,8 +13,6 @@ const NaviItem = ({ item, isSelected }) => {
     }));
   }, []);
 
-  console.log(selectItem);
-
   const isThreeDepth = item.list?.length > 0;
 
   if (isThreeDepth) {
@@ -26,15 +24,16 @@ const NaviItem = ({ item, isSelected }) => {
           </i>
           <p>{item.title}</p>
         </li>
-        <ThreeDepth style={selectItem[item.title] ? { display: 'block' } : undefined}>
-          {item.list.map((innerItem, index) => (
-            <li key={`${innerItem.title} ${index}`} style={selectItem[item.title] ? { display: 'block' } : undefined}>
-              <p>
-                <Link to={innerItem.url}>{innerItem.title}</Link>
-              </p>
-            </li>
-          ))}
-        </ThreeDepth>
+        {item.list.map((innerItem, index) => (
+          <ThreeDepth
+            key={`${innerItem.title} ${index}`}
+            style={selectItem[item.title] ? { display: 'block' } : undefined}
+          >
+            <p>
+              <Link to={innerItem.url}>{innerItem.title}</Link>
+            </p>
+          </ThreeDepth>
+        ))}
       </>
     );
   } else {

@@ -89,13 +89,18 @@ export const ThreeDepth = styled.li`
   margin-left: 20px !important;
   height: auto !important;
   opacity: 1 !important;
-  > li a {
+  a {
     text-decoration: none !important;
     font-size: 13px !important;
     color: #70767e !important;
-  }
-  & p {
-    position: relative;
-    color: #70767e;
+    :after {
+      content: '';
+      width: 100%;
+      height: 1px;
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      background-color: #eff3f6;
+    }
   }
 `;

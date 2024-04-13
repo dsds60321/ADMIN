@@ -7,7 +7,7 @@ const navigation = [
   {
     title: '리스트',
     icon: 'file-invoice',
-    item: [{ title: '리스트_샘플', url: '/list' }],
+    item: [{ title: '리스트_샘플', url: 'trx/card' }],
   },
   {
     title: '3-depth',
