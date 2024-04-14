@@ -6,6 +6,7 @@ const isAuthenticated = true;
 const Layout = loadable(() => import('@layouts/Layout'));
 const Login = loadable(() => import('@pages/Login'));
 const Card = loadable(() => import('@pages/Trx/Card'));
+
 const routers = [
   {
     path: '/',
