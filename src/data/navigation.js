@@ -5,9 +5,9 @@ const navigation = [
     item: [{ title: '폼_샘플', url: '/form' }],
   },
   {
-    title: '리스트',
+    title: '거래',
     icon: 'file-invoice',
-    item: [{ title: '리스트_샘플', url: 'trx/card' }],
+    item: [{ title: '카드', url: 'trx/card' }],
   },
   {
     title: '3-depth',

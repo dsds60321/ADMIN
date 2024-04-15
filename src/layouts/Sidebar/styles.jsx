@@ -17,11 +17,12 @@ export const Logo = styled.div`
   width: 84px;
   margin-left: 20px;
   margin-top: 20px;
+  cursor: pointer;
   & img {
     width: 84px;
   }
 `;
-export const MenuContents = styled.div`
+export const NavContents = styled.div`
   margin: 20px;
   ul {
     margin: 0;

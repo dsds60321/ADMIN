@@ -1,9 +1,16 @@
-import loadable from '@loadable/component';
+import PageTitle from '@components/Page/Title/index.jsx';
+import Search from '@components/Page/Search/index.jsx';
+import { TRX_CARD } from '@/data/seachFilters.js';
 
 const Card = () => {
-  const PageTitle = loadable(() => import('@components/Page/Title/index.jsx'));
-
-  return <PageTitle title="리스트_샘플" location={['홈', '리스트', '리스트_샘플']}></PageTitle>;
+  return (
+    <>
+      <PageTitle title="거래" location={['홈', '거래', '카드']} />
+      <div>
+        <Search data={TRX_CARD} />
+      </div>
+    </>
+  );
 };
 
 export default Card;

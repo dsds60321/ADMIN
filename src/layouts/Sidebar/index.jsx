@@ -1,7 +1,7 @@
-import { Logo, MenuContents, NavInnerWrap, NavWrap, ThreeDepth } from '@layouts/Sidebar/styles.jsx';
+import { Logo, NavContents, NavInnerWrap, NavWrap, ThreeDepth } from '@layouts/Sidebar/styles.jsx';
 import { useCallback, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const NaviItem = ({ item, isSelected }) => {
   const [selectItem, setSelectItem] = useState({});
@@ -52,6 +52,7 @@ const NaviItem = ({ item, isSelected }) => {
 };
 
 const Sidebar = ({ data }) => {
+  const navigate = useNavigate();
   const [selectItem, setSelectItem] = useState({});
 
   const onSelectItem = useCallback((path) => {
@@ -61,13 +62,17 @@ const Sidebar = ({ data }) => {
     }));
   }, []);
 
+  const onHome = useCallback(() => {
+    return navigate('/');
+  }, []);
+
   return (
     <NavWrap>
-      <Logo>
+      <Logo onClick={onHome}>
         <img src="/src/assets/images/logo.png" alt="" />
       </Logo>
       <NavInnerWrap>
-        <MenuContents>
+        <NavContents>
           {data.map((navItem, index) => (
             <ul key={`${navItem.title} ${index}`}>
               <li onClick={() => onSelectItem(navItem.title)}>
@@ -89,7 +94,7 @@ const Sidebar = ({ data }) => {
                 })}
             </ul>
           ))}
-        </MenuContents>
+        </NavContents>
       </NavInnerWrap>
     </NavWrap>
   );
