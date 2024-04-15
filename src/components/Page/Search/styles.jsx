@@ -4,6 +4,9 @@ export const SearchWrap = styled.div`
   margin: 20px 20px;
   position: relative;
   z-index: 101;
+  > div {
+    position: relative;
+  }
 `;
 
 export const SearchInnerWarp = styled.div`
