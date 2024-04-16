@@ -12,18 +12,19 @@ export const SearchWrap = styled.div`
   }
 `;
 
-export const MainSectionWrap = styled.div`
+export const TabWrap = styled.div`
   border: 1px solid #bec2c7;
   background-color: #ffffff;
   border-radius: 8px;
   display: flex;
+`;
+
+export const MainOption = styled.div`
   width: calc(100% - 14px);
   padding: 5px 10px;
+  display: flex;
   opacity: 1;
   transition: opacity 0.2s;
-  > div:nth-of-type(1) {
-    padding-right: 0;
-  }
 `;
 
 export const DateDiv = styled.div`
@@ -131,15 +132,6 @@ export const DateSelect = styled.div`
   }
 `;
 
-export const DetailSectionWrap = styled.div`
-  border-top: 0px;
-  width: calc(100% - 2px);
-  display: none;
-  position: relative;
-  flex-direction: column;
-  top: 0px;
-`;
-
 export const DatePicker = styled.button`
   &:after {
     content: '';
@@ -173,12 +165,37 @@ export const Down = styled.i`
 `;
 
 export const SearchInput = styled.input`
-  background: none;
+  background: none !important;
   height: 34px;
   border: none !important;
-  background: none !important;
 `;
 
-export const SearchButton = styled.button`
-  border-radius: 4px;
+export const DetailButton = styled.div`
+  width: 140px;
+  border-left: 1px solid #bec2c7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  > i {
+    margin-right: 10px;
+  }
+`;
+
+export const DetailSectionWrap = styled.div`
+  display: flex;
+  height: auto;
+  animation-duration: 0.2s;
+  animation-name: searchDetail;
+  > div {
+    width: 100%;
+    > div {
+      width: 100%;
+      border: 1px solid #000000;
+      border-radius: 0px 0px 8px 8px;
+      position: relative;
+      top: -1px;
+      background-color: #ffffff;
+    }
+  }
 `;

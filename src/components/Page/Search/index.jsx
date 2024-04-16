@@ -1,21 +1,22 @@
 import {
-  SearchWrap,
-  MainSectionWrap,
-  DetailSectionWrap,
   DateDiv,
-  DateSelect,
   DatePicker,
+  DateSelect,
+  DetailButton,
+  DetailSectionWrap,
   Down,
-  SearchInput,
+  MainOption,
   SearchDiv,
-  SearchButton,
+  SearchInput,
+  SearchWrap,
+  TabWrap,
 } from '@components/Page/Search/styles.jsx';
 
 import '@/assets/css/search.css';
 import { useCallback, useMemo, useState } from 'react';
 import { useToggle } from '@hooks/useHooks.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { CommonButton } from '@components/Common/styles.jsx';
+import { CommonButton, Container } from '@components/Common/styles.jsx';
 
 export const Search = ({ data }) => {
   // 기본 data 함수
@@ -40,50 +41,68 @@ export const Search = ({ data }) => {
   return (
     <SearchWrap>
       <div>
-        <MainSectionWrap>
-          <DateDiv>
-            <DateSelect>
-              <ul>
-                <input type="hidden" />
-                <li className="val" onClick={onToggleDate}>
-                  {selectDay}
-                </li>
-                {toggleDate && (
-                  <li>
-                    <ul>
-                      {days.map((day) => (
-                        <li
-                          key={day.title}
-                          onClick={() => {
-                            onSelectDay(day.title);
-                          }}
-                        >
-                          {day.title}
-                        </li>
-                      ))}
-                    </ul>
+        <TabWrap>
+          <MainOption>
+            <DateDiv>
+              <DateSelect>
+                <ul>
+                  <input type="hidden" />
+                  <li className="val" onClick={onToggleDate}>
+                    {selectDay}
                   </li>
-                )}
-              </ul>
-            </DateSelect>
-          </DateDiv>
-          <DateDiv>
-            <DatePicker>
-              <Down>
-                <FontAwesomeIcon icon="fas fa-caret-down" />
-              </Down>
-            </DatePicker>
-          </DateDiv>
-          <SearchDiv>
+                  {toggleDate && (
+                    <li>
+                      <ul>
+                        {days.map((day) => (
+                          <li
+                            key={day.title}
+                            onClick={() => {
+                              onSelectDay(day.title);
+                            }}
+                          >
+                            {day.title}
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
+                  )}
+                </ul>
+              </DateSelect>
+            </DateDiv>
+            <DateDiv>
+              <DatePicker>
+                <Down>
+                  <FontAwesomeIcon icon="fas fa-caret-down" />
+                </Down>
+              </DatePicker>
+            </DateDiv>
+            <SearchDiv>
+              <i>
+                <FontAwesomeIcon icon="fas fa-search" />
+              </i>
+              <SearchInput placeholder={placeholder} />
+              <CommonButton theme="gray">검색</CommonButton>
+            </SearchDiv>
+          </MainOption>
+          <DetailButton>
             <i>
-              <FontAwesomeIcon icon="fas fa-search" />
+              <FontAwesomeIcon icon="fas fa-sort" />
             </i>
-            <SearchInput placeholder={placeholder} />
-            <CommonButton>검색</CommonButton>
-          </SearchDiv>
-        </MainSectionWrap>
+            <p>상세 검색</p>
+          </DetailButton>
+        </TabWrap>
+        <DetailSectionWrap>
+          <div>
+            <div>
+              <Container col="three">
+                <div></div>
+                <div></div>
+                <div></div>
+              </Container>
+            </div>
+          </div>
+        </DetailSectionWrap>
       </div>
-      <DetailSectionWrap></DetailSectionWrap>
     </SearchWrap>
   );
 };
