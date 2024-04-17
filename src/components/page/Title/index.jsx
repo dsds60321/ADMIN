@@ -1,4 +1,4 @@
-import { Location, Title } from '@components/Page/Title/styles.jsx';
+import { Location, Title } from '@components/page/Title/styles.jsx';
 
 const PageTitle = ({ title, location }) => {
   return (

@@ -26,11 +26,19 @@ const TRX_CARD = {
 
   searchOptions: [
     {
+      title: '구매자',
+      key: 'customer',
+      name: 'customer',
+      oper: 'eq',
+      type: 'input',
+      placeholder: '구매자',
+    },
+    {
       title: '브랜드',
       key: 'brand',
       name: 'brand',
       oper: 'eq',
-      type: 'list',
+      type: 'option',
       list: ['국민', '하나'],
     },
     {
@@ -38,7 +46,7 @@ const TRX_CARD = {
       key: 'appId',
       name: 'appId',
       oper: 'eq',
-      type: 'list',
+      type: 'option',
       list: ['app1', 'app2'],
     },
     {
@@ -48,14 +56,6 @@ const TRX_CARD = {
       oper: 'eq',
       type: 'input',
       placeholder: '거래금액',
-    },
-    {
-      title: '구매자',
-      key: 'customer',
-      name: 'customer',
-      oper: 'eq',
-      type: 'input',
-      placeholder: '구매자',
     },
   ],
 

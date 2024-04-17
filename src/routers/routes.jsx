@@ -1,5 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import loadable from '@loadable/component';
+import { TRX_CARD } from '@/data/filter.js';
 
 const isAuthenticated = true;
 
@@ -21,7 +22,10 @@ const routers = [
     element: <Layout />,
     children: [
       { index: true, element: <h1>Dashboard</h1> },
-      { path: 'trx/card', element: <Card /> },
+      {
+        path: 'trx/card',
+        element: <Card data={TRX_CARD} />,
+      },
     ],
   },
 ];

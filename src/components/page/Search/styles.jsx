@@ -12,10 +12,10 @@ export const SearchWrap = styled.div`
   }
 `;
 
-export const TabWrap = styled.div`
+export const MainWrap = styled.div`
   border: 1px solid #bec2c7;
   background-color: #ffffff;
-  border-radius: 8px;
+  border-radius: ${({ toggle }) => (toggle ? '8px 8px 0px 0px' : '8px')};
   display: flex;
 `;
 
@@ -133,6 +133,13 @@ export const DateSelect = styled.div`
 `;
 
 export const DatePicker = styled.button`
+  > i {
+    position: absolute;
+    right: 34px;
+    bottom: 15px;
+    font-size: 14px;
+    color: #046c9f;
+  }
   &:after {
     content: '';
     height: calc(100% - 20px);
@@ -156,14 +163,6 @@ export const DatePicker = styled.button`
     background 0.2s;
 `;
 
-export const Down = styled.i`
-  position: absolute;
-  right: 34px;
-  bottom: 15px;
-  font-size: 14px;
-  color: #046c9f;
-`;
-
 export const SearchInput = styled.input`
   background: none !important;
   height: 34px;
@@ -183,10 +182,11 @@ export const DetailButton = styled.div`
 `;
 
 export const DetailSectionWrap = styled.div`
-  display: flex;
+  display: ${({ toggle }) => (toggle ? 'flex' : 'none')};
   height: auto;
   animation-duration: 0.2s;
   animation-name: searchDetail;
+
   > div {
     width: 100%;
     > div {
@@ -197,5 +197,22 @@ export const DetailSectionWrap = styled.div`
       top: -1px;
       background-color: #ffffff;
     }
+  }
+`;
+
+/**
+ * default Container three
+ * @type {*|CSSNumericValue}
+ */
+export const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  //:nth-child(1) {
+  :nth-of-type(1) {
+    border-top: 0px;
+  }
+  > div {
+    width: 33%;
   }
 `;

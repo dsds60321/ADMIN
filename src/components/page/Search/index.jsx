@@ -1,47 +1,78 @@
 import {
+  Container,
   DateDiv,
   DatePicker,
   DateSelect,
   DetailButton,
   DetailSectionWrap,
-  Down,
   MainOption,
+  MainWrap,
   SearchDiv,
   SearchInput,
   SearchWrap,
-  TabWrap,
-} from '@components/Page/Search/styles.jsx';
+} from '@components/page/Search/styles.jsx';
 
 import '@/assets/css/search.css';
-import { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useToggle } from '@hooks/useHooks.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { CommonButton, Container } from '@components/Common/styles.jsx';
+import { CommonButton } from '@components/common/styles.jsx';
+import { ViewGroup } from '@components/common/index.jsx';
+
+const getSearchOption = (options, number = 3) => {
+  const groupedOptions = [];
+  for (let i = 0; i < options.length; i += number) {
+    let sliceOption = options.slice(i, i + number);
+    groupedOptions.push(sliceOption);
+  }
+  return groupedOptions;
+};
+
+// TODO : react 3개가 아니면 div로 미는 코드 추가
+/**
+ * 검색 필터
+ * @param data
+ * @returns {unknown[]}
+ * @constructor
+ */
+const SearchFilter = (data) => {
+  const options = getSearchOption(data);
+  return options.map((optionGroup, index) => (
+    <React.Fragment key={`optionGroup_${index}`}>
+      <Container>
+        {optionGroup.map((option) => (
+          <ViewGroup key={option.title} type={option.type} data={option} />
+        ))}
+      </Container>
+    </React.Fragment>
+  ));
+};
 
 export const Search = ({ data }) => {
   // 기본 data 함수
-  const { defaultDay, days, placeholder } = useMemo(() => {
+  const { defaultDay, days, placeholder, searchOptions } = useMemo(() => {
     const defaultDay = data.days.filter((day) => day.default)[0].title;
-    const { days, placeholder } = data;
-    return { defaultDay, days, placeholder };
+    const { days, placeholder, searchOptions } = data;
+    return { defaultDay, days, placeholder, searchOptions };
   }, [data]);
 
-  const [selectDay, setSelectDay] = useState(defaultDay);
+  const [toggleDetailSearch, _, onToggleDetailSearch] = useToggle(true);
   const [toggleDate, setToggleDate] = useToggle(false);
-
-  const onToggleDate = useCallback(() => {
-    setToggleDate((prevState) => !prevState);
-  }, []);
+  const [selectDay, setSelectDay] = useState(defaultDay);
 
   const onSelectDay = useCallback((val) => {
     setSelectDay(val);
     setToggleDate(false);
   }, []);
 
+  const onToggleDate = useCallback(() => {
+    setToggleDate((prevState) => !prevState);
+  }, []);
+
   return (
     <SearchWrap>
       <div>
-        <TabWrap>
+        <MainWrap toggle={toggleDetailSearch}>
           <MainOption>
             <DateDiv>
               <DateSelect>
@@ -71,9 +102,9 @@ export const Search = ({ data }) => {
             </DateDiv>
             <DateDiv>
               <DatePicker>
-                <Down>
+                <i>
                   <FontAwesomeIcon icon="fas fa-caret-down" />
-                </Down>
+                </i>
               </DatePicker>
             </DateDiv>
             <SearchDiv>
@@ -84,22 +115,16 @@ export const Search = ({ data }) => {
               <CommonButton theme="gray">검색</CommonButton>
             </SearchDiv>
           </MainOption>
-          <DetailButton>
+          <DetailButton onClick={onToggleDetailSearch}>
             <i>
               <FontAwesomeIcon icon="fas fa-sort" />
             </i>
             <p>상세 검색</p>
           </DetailButton>
-        </TabWrap>
-        <DetailSectionWrap>
+        </MainWrap>
+        <DetailSectionWrap toggle={toggleDetailSearch}>
           <div>
-            <div>
-              <Container col="three">
-                <div></div>
-                <div></div>
-                <div></div>
-              </Container>
-            </div>
+            <div>{SearchFilter(searchOptions)}</div>
           </div>
         </DetailSectionWrap>
       </div>

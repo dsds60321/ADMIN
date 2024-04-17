@@ -1,13 +1,24 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Label, Value, ViewGroupWrap } from '@components/common/styles.jsx';
+import { useToggle } from '@hooks/useHooks.js';
 
+/**
+ *
+ * @param type input, option
+ * @param data
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const ViewGroup = ({ type, data }) => {
+  const [toggle, _, onToggle] = useToggle(false);
+
   return (
-    <div>
-      <div>{data.title}</div>
-      <div>
+    <ViewGroupWrap>
+      <Label>{data?.title}</Label>
+      <Value toggle={toggle}>
         {type === 'input' && (
           <>
-            <input type="text" placeholder={data.placeholder} />
+            <input type="text" placeholder={data?.placeholder} />
             <button>
               <FontAwesomeIcon icon="fas fa-plus" />
             </button>
@@ -17,11 +28,11 @@ export const ViewGroup = ({ type, data }) => {
         {type === 'option' && (
           <div>
             <input type="text" />
-            <ul>
+            <ul onClick={onToggle}>
               <li>선택</li>
               <li>
                 <ul>
-                  {data.list.map((option) => (
+                  {data?.list.map((option) => (
                     <li key={option}>{option}</li>
                   ))}
                 </ul>
@@ -29,7 +40,7 @@ export const ViewGroup = ({ type, data }) => {
             </ul>
           </div>
         )}
-      </div>
-    </div>
+      </Value>
+    </ViewGroupWrap>
   );
 };
